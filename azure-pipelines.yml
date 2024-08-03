@@ -1,0 +1,37 @@
+trigger: none
+
+pool: Todoapp
+stages:
+  - stage: build
+    displayName: build
+    jobs:
+      - job: dev
+        steps:
+         - task: NodeTool@0
+           inputs:
+             versionSource: 'spec'
+             versionSpec: '16.x'
+         - task: Npm@1
+           inputs:
+             command: 'install'
+         - task: Npm@1
+           inputs:
+             command: 'custom'
+             customCommand: 'run build'
+         - task: PublishBuildArtifacts@1
+           inputs:
+             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+             ArtifactName: 'Addidasartifacts'
+             publishLocation: 'Container'
+  - stage: deployment
+    displayName: deploy application
+    jobs:
+      - job: deployment
+        steps:
+        - task: DownloadBuildArtifacts@1
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: 'artifactaddidasuse'
+            downloadPath: '$(Build.ArtifactStagingDirectory)'
+        
