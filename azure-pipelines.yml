@@ -20,7 +20,7 @@ stages:
              customCommand: 'run build'
          - task: PublishBuildArtifacts@1
            inputs:
-             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+             PathtoPublish: '$(Build.SourcesDirectory)/build/'
              ArtifactName: 'Addidasartifacts'
              publishLocation: 'Container'
   - stage: deployment
