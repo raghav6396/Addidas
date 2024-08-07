@@ -23,15 +23,3 @@ stages:
              PathtoPublish: '$(Build.SourcesDirectory)/build/'
              ArtifactName: 'Addidasartifacts'
              publishLocation: 'Container'
-  - stage: deployment
-    displayName: deploy application
-    jobs:
-      - job: deployment
-        steps:
-        - task: DownloadBuildArtifacts@1
-          inputs:
-            buildType: 'current'
-            downloadType: 'single'
-            artifactName: 'artifactaddidasuse'
-            downloadPath: '$(Build.ArtifactStagingDirectory)'
-        
