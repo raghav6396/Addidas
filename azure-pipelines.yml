@@ -1,6 +1,7 @@
 trigger: none
 
-pool: Todoapp
+pool: Default
+
 stages:
   - stage: build
     displayName: build
